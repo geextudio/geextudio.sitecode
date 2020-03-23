@@ -1,0 +1,104 @@
+# Robotframework 入门
+[Robot Framework](https://robotframework.org/) 3.x 是一个测试框架， 用来进行[验收测试](https://github.com/robotframework/robotframework/tree/master/atest), 以及验收测试驱动的开发 ([ATDD](https://en.wikipedia.org/wiki/Acceptance_test%E2%80%93driven_development)).
+
+[Robot Framework](https://robotframework.org/)结合不同的库可以进行各类测试，比如 Web 或者移动端 Android 测试. 同时可以使用 Python 对测试逻辑或者特征进行扩展.
+
+第一篇先来说说 Web 测试开发环境的搭建.
+
+# 构建环境 (on Python 3.7+ )
+1. 创建虚拟环境:
+   * Windows:
+   ```bash
+   python -m venv robot.venv
+   ```
+   * Linux / Mac:
+   ```bash
+   python3 -m venv robot.venv
+   ```
+2. 激活虚拟环境:
+   * Windows:
+    ```bash
+    robot.venv\Scripts\activate
+    ```
+    * Linux / Mac:
+    ```bash
+    source robot.venv/bin/activate
+    ```
+3. 安装 robotframework 和 [RIDE 1.7.4.1](https://github.com/robotframework/RIDE/blob/master/doc/releasenotes/ride-1.7.4.1.rst):
+
+   先更新 pip
+   ```bash
+   python -m pip install --upgrade pip
+   ```
+   * 作为开发者，在终端运行如下命令
+   ```bash
+   pip install -r requirements.txt
+   ```
+   * 在执行包含测试的持续集成服务器上执行如下命令
+   ```bash
+   pip install -r requirements.ci.txt
+   ```
+4. 安装基于 Firefox 的驱动 [Webdriver](https://github.com/rasjani/webdrivermanager) ( 主流 linux distros 通常都预装了 Firefox ):
+   * 4.1 执行如下命令将驱动下载到文件夹 **webdrivers**
+   ```bash
+   webdrivermanager firefox --linkpath ./webdrivers
+   ```
+   * 4.2 将文件夹 **webdrivers** 添加到系统环境变量 **PATH**
+5. 开发者可以执行如下命令启动内建的开发编辑器 [RIDE 1.7.4.1](https://github.com/robotframework/RIDE/blob/master/doc/releasenotes/ride-1.7.4.1.rst) 编写和调试测试用例:
+    ```bash
+    python -m robotide.__init__
+    ```
+6. 本地开发完成后关闭虚拟环境:
+   * Windows:
+    ```bash
+    robot.venv\Scripts\deactivate
+    ```
+    * Linux / Mac:
+    ```bash
+    deactivate
+    ```
+
+# 测试流程 (on Python 3.7+ )
+1. 激活虚拟环境:
+    * Windows:
+    ```bash
+    robot.venv\Scripts\activate
+    ```
+    * Linux / Mac:
+    ```bash
+    source robot.venv/bin/activate
+    ```
+2. 创建或更改 .robot 文件中的测试用例：
+    > Robot Framework uses the **[KEYWORD-DRIVEN](https://en.wikipedia.org/wiki/Keyword-driven_testing)** approach that supports writing tests that capture the essence of the actions and expectations in natural language.
+    > Test cases are constructed from [keyword](https://github.com/robotframework/QuickStartGuide/blob/master/QuickStart.rst#keywords) and their possible arguments.
+    >
+    > The syntax requires that [keyword](https://github.com/robotframework/QuickStartGuide/blob/master/QuickStart.rst#keywords) and arguments are separated by **4** spaces.
+3. 运行如下命令执行测试:
+   ```bash
+    robot --variable BROWSER:Firefox login_tests
+    robot --variable BROWSER:Chrome login_tests
+    robot --variable BROWSER:IE login_tests
+    # Executing multiple test case files and using case-insensitive long options.
+    # Windows
+    robot --SuiteStatLevel 2 --Metadata Version:3 .\robots\robot__test_robots\*.robot .\robots\_examples\*.robot
+    # Linux / Mac
+    robot --SuiteStatLevel 2 --Metadata Version:3 robots/robot__test_robots/*.robot robots/_examples/*.robot
+   ```
+4. 或者启动 [RIDE 1.7.4.1](https://github.com/robotframework/RIDE/blob/master/doc/releasenotes/ride-1.7.4.1.rst) 编写测试
+    ```bash
+    python -m robotide.__init__
+    ```
+
+# 开发工具
+* VSCode
+  * [robotframework](https://marketplace.visualstudio.com/items?itemName=vivainio.robotframework)
+  * [Robot Framework Intellisense](https://marketplace.visualstudio.com/items?itemName=TomiTurtiainen.rf-intellisense)
+  * [Robotframework Debugger](https://marketplace.visualstudio.com/items?itemName=JacobPhilip.danfoss-robotframework-debug)
+* [RIDE 1.7.4.1](https://github.com/robotframework/RIDE/blob/master/doc/releasenotes/ride-1.7.4.1.rst), 官方出品的测试编辑器.
+
+# 参考:
+* [快速入门](https://github.com/robotframework/QuickStartGuide/blob/master/QuickStart.rst)
+* [SeleniumLibrary](https://github.com/robotframework/SeleniumLibrary)
+  * [使用 Robot Framework 和 SeleniumLibrary 进行 Web 测试](https://github.com/robotframework/WebDemo)
+* [如何使用 Robot Framework 编写好的测试用例](https://github.com/robotframework/HowToWriteGoodTestCases/blob/master/HowToWriteGoodTestCases.rst)
+* [Robot Framework 用户手册](http://robotframework.org/robotframework/#user-guide)
