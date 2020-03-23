@@ -1,5 +1,7 @@
 import Head from 'next/head'
 
+import Hello from "../markdown/hello.mdx";
+
 const Home = () => (
   <div className="container">
     <Head>
@@ -11,6 +13,8 @@ const Home = () => (
       <h1 className="title">
         Welcome to 极客诚品 ( Geextudio )!
       </h1>
+
+      <Hello />
 
       <img src='https://bizbetter.coding.net/p/appresource/d/appresource/git/raw/master/images/logo.geextudio.png' />
     </main>
