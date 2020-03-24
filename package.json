@@ -14,5 +14,7 @@
     "react": "16.13.1",
     "react-dom": "16.13.1"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "mdx-deck": "^4.1.1"
+  }
 }
