@@ -11,12 +11,12 @@ const Home = () => (
 
     <main>
       <h1 className="title">
-        Welcome to 极客诚品 ( Geextudio )!
+        极客诚品 ( Geextudio )
       </h1>
 
       <Hello />
 
-      <img src='https://bizbetter.coding.net/p/appresource/d/appresource/git/raw/master/images/logo.geextudio.png' />
+
     </main>
 
     <footer>

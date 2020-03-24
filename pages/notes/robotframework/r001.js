@@ -3,7 +3,7 @@ import Head from 'next/head'
 import Note1 from '../../../markdown/robotframework/001.mdx'
 
 
-const Home = () => (
+const Rf001 = () => (
         <Note1 />
 )
-export default Home
+export default Rf001
